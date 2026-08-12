@@ -1,0 +1,43 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d2" for="edge" attr.name="distance" attr.type="double" />
+  <key id="d1" for="edge" attr.name="abs_weight" attr.type="double" />
+  <key id="d0" for="edge" attr.name="weight" attr.type="double" />
+  <graph edgedefault="undirected">
+    <node id="AGG" />
+    <node id="ALU" />
+    <node id="BRICK" />
+    <node id="CEM" />
+    <node id="CLAY" />
+    <node id="DIESEL" />
+    <node id="IRON" />
+    <node id="IRONSTEEL" />
+    <node id="LABOUR" />
+    <node id="LIME" />
+    <node id="MURRAM" />
+    <node id="NAILS" />
+    <node id="PAINT" />
+    <node id="PIPES" />
+    <node id="SAND" />
+    <node id="STEEL" />
+    <node id="TILES" />
+    <node id="TIMBER" />
+    <node id="exchange_rate" />
+    <node id="ppi_manufacturing" />
+    <edge source="CEM" target="NAILS">
+      <data key="d0">-0.25006753183423763</data>
+      <data key="d1">0.25006753183423763</data>
+      <data key="d2">0.7499324681657624</data>
+    </edge>
+    <edge source="CEM" target="PAINT">
+      <data key="d0">0.2109323368706116</data>
+      <data key="d1">0.2109323368706116</data>
+      <data key="d2">0.7890676631293884</data>
+    </edge>
+    <edge source="DIESEL" target="MURRAM">
+      <data key="d0">0.20604604491188702</data>
+      <data key="d1">0.20604604491188702</data>
+      <data key="d2">0.793953955088113</data>
+    </edge>
+  </graph>
+</graphml>

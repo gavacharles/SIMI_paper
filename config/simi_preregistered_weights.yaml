@@ -1,0 +1,25 @@
+# Pre-registered weighting grid for SIMI construction
+# SIMI_i = (w_spill * z(spillover_transmission_i) + w_cent * z(centrality_i)) * (1 + basket_share_i)
+
+weighting_scenarios:
+  equal:
+    spillover: 0.50
+    centrality: 0.50
+  spillover_heavy:
+    spillover: 0.70
+    centrality: 0.30
+  centrality_heavy:
+    spillover: 0.30
+    centrality: 0.70
+
+spillover:
+  lags: 2
+  horizon: 10
+
+robustness:
+  thresholds: [0.15, 0.20, 0.25, 0.30]
+  windows: [36, 48, 60]
+  subsamples:
+    pre_covid: ["2016-01-01", "2019-12-31"]
+    covid: ["2020-01-01", "2021-12-31"]
+    post_2022: ["2022-01-01", "2026-12-31"]
