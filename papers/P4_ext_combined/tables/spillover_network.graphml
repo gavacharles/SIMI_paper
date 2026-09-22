@@ -1,0 +1,615 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d0" for="edge" attr.name="weight" attr.type="double" />
+  <graph edgedefault="directed">
+    <node id="AGG" />
+    <node id="ALU" />
+    <node id="BRICK" />
+    <node id="CEM" />
+    <node id="CLAY" />
+    <node id="DIESEL" />
+    <node id="IRON" />
+    <node id="IRONSTEEL" />
+    <node id="LABOUR" />
+    <node id="LIME" />
+    <node id="MURRAM" />
+    <node id="NAILS" />
+    <node id="PAINT" />
+    <node id="PIPES" />
+    <node id="SAND" />
+    <node id="STEEL" />
+    <node id="TILES" />
+    <node id="TIMBER" />
+    <node id="exchange_rate" />
+    <node id="ppi_manufacturing" />
+    <node id="brent_crude_usd" />
+    <node id="iron_ore_usd" />
+    <node id="gscpi_supply_chain_pressure" />
+    <node id="central_bank_rate" />
+    <node id="lending_rate" />
+    <node id="private_credit" />
+    <node id="activity_indicator" />
+    <edge source="AGG" target="CEM">
+      <data key="d0">2.965321726148101</data>
+    </edge>
+    <edge source="AGG" target="CLAY">
+      <data key="d0">7.01903924973189</data>
+    </edge>
+    <edge source="AGG" target="DIESEL">
+      <data key="d0">5.072464436454319</data>
+    </edge>
+    <edge source="AGG" target="LABOUR">
+      <data key="d0">9.304513914350446</data>
+    </edge>
+    <edge source="AGG" target="MURRAM">
+      <data key="d0">4.577942347407461</data>
+    </edge>
+    <edge source="AGG" target="NAILS">
+      <data key="d0">4.165113382433927</data>
+    </edge>
+    <edge source="AGG" target="STEEL">
+      <data key="d0">4.14750644959712</data>
+    </edge>
+    <edge source="AGG" target="TILES">
+      <data key="d0">3.7632492970314466</data>
+    </edge>
+    <edge source="AGG" target="central_bank_rate">
+      <data key="d0">3.8259496815957528</data>
+    </edge>
+    <edge source="AGG" target="activity_indicator">
+      <data key="d0">2.547269316129664</data>
+    </edge>
+    <edge source="ALU" target="CEM">
+      <data key="d0">24.0166182391712</data>
+    </edge>
+    <edge source="ALU" target="IRONSTEEL">
+      <data key="d0">12.576581127081447</data>
+    </edge>
+    <edge source="ALU" target="PAINT">
+      <data key="d0">5.3062279900520215</data>
+    </edge>
+    <edge source="ALU" target="iron_ore_usd">
+      <data key="d0">2.9590407737772804</data>
+    </edge>
+    <edge source="ALU" target="gscpi_supply_chain_pressure">
+      <data key="d0">4.091450643730239</data>
+    </edge>
+    <edge source="ALU" target="activity_indicator">
+      <data key="d0">2.896622371815327</data>
+    </edge>
+    <edge source="BRICK" target="CEM">
+      <data key="d0">2.649370008261631</data>
+    </edge>
+    <edge source="BRICK" target="CLAY">
+      <data key="d0">5.847952057466036</data>
+    </edge>
+    <edge source="BRICK" target="LIME">
+      <data key="d0">6.896197739912087</data>
+    </edge>
+    <edge source="BRICK" target="NAILS">
+      <data key="d0">4.342657864299583</data>
+    </edge>
+    <edge source="BRICK" target="PAINT">
+      <data key="d0">2.967432219928976</data>
+    </edge>
+    <edge source="BRICK" target="PIPES">
+      <data key="d0">5.746363505055904</data>
+    </edge>
+    <edge source="BRICK" target="STEEL">
+      <data key="d0">4.176949996432911</data>
+    </edge>
+    <edge source="BRICK" target="TIMBER">
+      <data key="d0">4.251855207813126</data>
+    </edge>
+    <edge source="BRICK" target="central_bank_rate">
+      <data key="d0">9.412618986139885</data>
+    </edge>
+    <edge source="BRICK" target="lending_rate">
+      <data key="d0">3.2256284551748413</data>
+    </edge>
+    <edge source="CEM" target="MURRAM">
+      <data key="d0">2.863007984047585</data>
+    </edge>
+    <edge source="CEM" target="NAILS">
+      <data key="d0">2.452318136000563</data>
+    </edge>
+    <edge source="CEM" target="SAND">
+      <data key="d0">5.087647056455364</data>
+    </edge>
+    <edge source="CEM" target="brent_crude_usd">
+      <data key="d0">5.221508486940952</data>
+    </edge>
+    <edge source="CEM" target="iron_ore_usd">
+      <data key="d0">2.461096014981841</data>
+    </edge>
+    <edge source="CLAY" target="AGG">
+      <data key="d0">7.229595022814609</data>
+    </edge>
+    <edge source="CLAY" target="BRICK">
+      <data key="d0">6.120102456631138</data>
+    </edge>
+    <edge source="CLAY" target="CEM">
+      <data key="d0">4.194096319866643</data>
+    </edge>
+    <edge source="CLAY" target="LABOUR">
+      <data key="d0">4.5804861099303515</data>
+    </edge>
+    <edge source="CLAY" target="LIME">
+      <data key="d0">4.827512485691223</data>
+    </edge>
+    <edge source="CLAY" target="NAILS">
+      <data key="d0">6.1961057352894455</data>
+    </edge>
+    <edge source="CLAY" target="PAINT">
+      <data key="d0">4.210773763378471</data>
+    </edge>
+    <edge source="CLAY" target="STEEL">
+      <data key="d0">6.744806959295481</data>
+    </edge>
+    <edge source="CLAY" target="TILES">
+      <data key="d0">2.0524336181997875</data>
+    </edge>
+    <edge source="CLAY" target="TIMBER">
+      <data key="d0">9.885009276294603</data>
+    </edge>
+    <edge source="CLAY" target="private_credit">
+      <data key="d0">2.785733888177868</data>
+    </edge>
+    <edge source="DIESEL" target="AGG">
+      <data key="d0">7.594772871883307</data>
+    </edge>
+    <edge source="DIESEL" target="ALU">
+      <data key="d0">2.0770294272420062</data>
+    </edge>
+    <edge source="DIESEL" target="BRICK">
+      <data key="d0">2.7845826541119356</data>
+    </edge>
+    <edge source="DIESEL" target="CEM">
+      <data key="d0">4.647102623329934</data>
+    </edge>
+    <edge source="DIESEL" target="LIME">
+      <data key="d0">2.7286762788597754</data>
+    </edge>
+    <edge source="DIESEL" target="MURRAM">
+      <data key="d0">13.881681634806753</data>
+    </edge>
+    <edge source="DIESEL" target="SAND">
+      <data key="d0">4.302398280034352</data>
+    </edge>
+    <edge source="DIESEL" target="STEEL">
+      <data key="d0">3.920774084667001</data>
+    </edge>
+    <edge source="DIESEL" target="TILES">
+      <data key="d0">7.98724899234779</data>
+    </edge>
+    <edge source="DIESEL" target="exchange_rate">
+      <data key="d0">2.7327745167611983</data>
+    </edge>
+    <edge source="DIESEL" target="ppi_manufacturing">
+      <data key="d0">9.897376223722764</data>
+    </edge>
+    <edge source="DIESEL" target="activity_indicator">
+      <data key="d0">3.628596203815473</data>
+    </edge>
+    <edge source="IRON" target="IRONSTEEL">
+      <data key="d0">3.6996545847738838</data>
+    </edge>
+    <edge source="IRON" target="LABOUR">
+      <data key="d0">3.123398148008064</data>
+    </edge>
+    <edge source="IRON" target="PAINT">
+      <data key="d0">4.174845055993714</data>
+    </edge>
+    <edge source="IRON" target="ppi_manufacturing">
+      <data key="d0">2.220067759215726</data>
+    </edge>
+    <edge source="IRONSTEEL" target="ALU">
+      <data key="d0">12.644426079501336</data>
+    </edge>
+    <edge source="IRONSTEEL" target="CEM">
+      <data key="d0">5.932541567673356</data>
+    </edge>
+    <edge source="IRONSTEEL" target="IRON">
+      <data key="d0">3.4668818000169077</data>
+    </edge>
+    <edge source="IRONSTEEL" target="PAINT">
+      <data key="d0">2.101019079338298</data>
+    </edge>
+    <edge source="IRONSTEEL" target="exchange_rate">
+      <data key="d0">3.1655037772718253</data>
+    </edge>
+    <edge source="LABOUR" target="AGG">
+      <data key="d0">3.0042204215087307</data>
+    </edge>
+    <edge source="LABOUR" target="CLAY">
+      <data key="d0">2.5521570187097264</data>
+    </edge>
+    <edge source="LABOUR" target="IRON">
+      <data key="d0">3.525793818764527</data>
+    </edge>
+    <edge source="LABOUR" target="STEEL">
+      <data key="d0">2.1209808380153867</data>
+    </edge>
+    <edge source="LABOUR" target="TIMBER">
+      <data key="d0">2.011761133055962</data>
+    </edge>
+    <edge source="LIME" target="BRICK">
+      <data key="d0">5.7797709158830095</data>
+    </edge>
+    <edge source="LIME" target="CLAY">
+      <data key="d0">3.3848922143028606</data>
+    </edge>
+    <edge source="LIME" target="SAND">
+      <data key="d0">2.577251825446076</data>
+    </edge>
+    <edge source="LIME" target="private_credit">
+      <data key="d0">3.478834524258783</data>
+    </edge>
+    <edge source="MURRAM" target="AGG">
+      <data key="d0">8.43817222524215</data>
+    </edge>
+    <edge source="MURRAM" target="BRICK">
+      <data key="d0">3.344464419021314</data>
+    </edge>
+    <edge source="MURRAM" target="CEM">
+      <data key="d0">5.078733013489905</data>
+    </edge>
+    <edge source="MURRAM" target="CLAY">
+      <data key="d0">2.8038545967806074</data>
+    </edge>
+    <edge source="MURRAM" target="DIESEL">
+      <data key="d0">18.91071710324902</data>
+    </edge>
+    <edge source="MURRAM" target="IRON">
+      <data key="d0">3.9548630945830707</data>
+    </edge>
+    <edge source="MURRAM" target="LABOUR">
+      <data key="d0">2.644126962455612</data>
+    </edge>
+    <edge source="MURRAM" target="LIME">
+      <data key="d0">3.5580744128650394</data>
+    </edge>
+    <edge source="MURRAM" target="NAILS">
+      <data key="d0">5.15832607226051</data>
+    </edge>
+    <edge source="MURRAM" target="PAINT">
+      <data key="d0">2.524231012316952</data>
+    </edge>
+    <edge source="MURRAM" target="SAND">
+      <data key="d0">10.987545687421491</data>
+    </edge>
+    <edge source="MURRAM" target="STEEL">
+      <data key="d0">14.360157200709015</data>
+    </edge>
+    <edge source="MURRAM" target="TILES">
+      <data key="d0">7.936413147943826</data>
+    </edge>
+    <edge source="MURRAM" target="TIMBER">
+      <data key="d0">7.692366737510538</data>
+    </edge>
+    <edge source="MURRAM" target="exchange_rate">
+      <data key="d0">4.318587971802682</data>
+    </edge>
+    <edge source="MURRAM" target="ppi_manufacturing">
+      <data key="d0">12.694849563525684</data>
+    </edge>
+    <edge source="MURRAM" target="brent_crude_usd">
+      <data key="d0">5.987619167820213</data>
+    </edge>
+    <edge source="MURRAM" target="central_bank_rate">
+      <data key="d0">2.1372210813633625</data>
+    </edge>
+    <edge source="MURRAM" target="activity_indicator">
+      <data key="d0">2.9424914463282494</data>
+    </edge>
+    <edge source="NAILS" target="AGG">
+      <data key="d0">4.084469172506123</data>
+    </edge>
+    <edge source="NAILS" target="BRICK">
+      <data key="d0">4.3005977903153125</data>
+    </edge>
+    <edge source="NAILS" target="CLAY">
+      <data key="d0">5.887991532174474</data>
+    </edge>
+    <edge source="NAILS" target="MURRAM">
+      <data key="d0">2.8328240647573977</data>
+    </edge>
+    <edge source="NAILS" target="PAINT">
+      <data key="d0">10.857440625215443</data>
+    </edge>
+    <edge source="NAILS" target="STEEL">
+      <data key="d0">7.537914995531403</data>
+    </edge>
+    <edge source="NAILS" target="TIMBER">
+      <data key="d0">6.14774780191791</data>
+    </edge>
+    <edge source="NAILS" target="gscpi_supply_chain_pressure">
+      <data key="d0">7.795043963962904</data>
+    </edge>
+    <edge source="NAILS" target="private_credit">
+      <data key="d0">4.2707929368726</data>
+    </edge>
+    <edge source="PAINT" target="BRICK">
+      <data key="d0">2.1968253790809977</data>
+    </edge>
+    <edge source="PAINT" target="CLAY">
+      <data key="d0">2.1517721862485</data>
+    </edge>
+    <edge source="PAINT" target="IRON">
+      <data key="d0">5.085759933597767</data>
+    </edge>
+    <edge source="PAINT" target="LABOUR">
+      <data key="d0">3.1523257110790834</data>
+    </edge>
+    <edge source="PAINT" target="NAILS">
+      <data key="d0">6.134767765346643</data>
+    </edge>
+    <edge source="PAINT" target="SAND">
+      <data key="d0">4.342493858750589</data>
+    </edge>
+    <edge source="PAINT" target="activity_indicator">
+      <data key="d0">2.3916837113557636</data>
+    </edge>
+    <edge source="PIPES" target="BRICK">
+      <data key="d0">3.6851367114263742</data>
+    </edge>
+    <edge source="PIPES" target="activity_indicator">
+      <data key="d0">4.373453805790866</data>
+    </edge>
+    <edge source="SAND" target="AGG">
+      <data key="d0">4.203389492754811</data>
+    </edge>
+    <edge source="SAND" target="CEM">
+      <data key="d0">3.56803289772148</data>
+    </edge>
+    <edge source="SAND" target="DIESEL">
+      <data key="d0">3.280372477966864</data>
+    </edge>
+    <edge source="SAND" target="LIME">
+      <data key="d0">3.1268390785667592</data>
+    </edge>
+    <edge source="SAND" target="MURRAM">
+      <data key="d0">5.55618712350893</data>
+    </edge>
+    <edge source="SAND" target="PAINT">
+      <data key="d0">4.420766492867835</data>
+    </edge>
+    <edge source="SAND" target="ppi_manufacturing">
+      <data key="d0">5.810441969115269</data>
+    </edge>
+    <edge source="SAND" target="brent_crude_usd">
+      <data key="d0">3.1404177671567406</data>
+    </edge>
+    <edge source="STEEL" target="AGG">
+      <data key="d0">5.548806162158733</data>
+    </edge>
+    <edge source="STEEL" target="BRICK">
+      <data key="d0">5.565437232200308</data>
+    </edge>
+    <edge source="STEEL" target="CEM">
+      <data key="d0">3.4142189516099175</data>
+    </edge>
+    <edge source="STEEL" target="CLAY">
+      <data key="d0">8.30238266799699</data>
+    </edge>
+    <edge source="STEEL" target="DIESEL">
+      <data key="d0">4.006402191271619</data>
+    </edge>
+    <edge source="STEEL" target="IRON">
+      <data key="d0">4.37506158346282</data>
+    </edge>
+    <edge source="STEEL" target="LABOUR">
+      <data key="d0">4.342373557552053</data>
+    </edge>
+    <edge source="STEEL" target="LIME">
+      <data key="d0">3.147084135735196</data>
+    </edge>
+    <edge source="STEEL" target="MURRAM">
+      <data key="d0">10.110500449514932</data>
+    </edge>
+    <edge source="STEEL" target="NAILS">
+      <data key="d0">9.764187297689455</data>
+    </edge>
+    <edge source="STEEL" target="PAINT">
+      <data key="d0">3.73621362814184</data>
+    </edge>
+    <edge source="STEEL" target="SAND">
+      <data key="d0">2.6624188693777198</data>
+    </edge>
+    <edge source="STEEL" target="TIMBER">
+      <data key="d0">10.080092156565128</data>
+    </edge>
+    <edge source="STEEL" target="ppi_manufacturing">
+      <data key="d0">3.394554817537613</data>
+    </edge>
+    <edge source="STEEL" target="central_bank_rate">
+      <data key="d0">3.5007844747910397</data>
+    </edge>
+    <edge source="TILES" target="AGG">
+      <data key="d0">3.51620966765379</data>
+    </edge>
+    <edge source="TILES" target="ALU">
+      <data key="d0">2.4977505956572004</data>
+    </edge>
+    <edge source="TILES" target="CEM">
+      <data key="d0">7.572808253772198</data>
+    </edge>
+    <edge source="TILES" target="DIESEL">
+      <data key="d0">5.293775402019921</data>
+    </edge>
+    <edge source="TILES" target="MURRAM">
+      <data key="d0">4.146893620468612</data>
+    </edge>
+    <edge source="TILES" target="ppi_manufacturing">
+      <data key="d0">10.661158139293583</data>
+    </edge>
+    <edge source="TILES" target="iron_ore_usd">
+      <data key="d0">5.673181548528947</data>
+    </edge>
+    <edge source="TILES" target="gscpi_supply_chain_pressure">
+      <data key="d0">2.5781153907969445</data>
+    </edge>
+    <edge source="TIMBER" target="CLAY">
+      <data key="d0">9.152007579183593</data>
+    </edge>
+    <edge source="TIMBER" target="LABOUR">
+      <data key="d0">2.5410437006315187</data>
+    </edge>
+    <edge source="TIMBER" target="MURRAM">
+      <data key="d0">3.953714153212825</data>
+    </edge>
+    <edge source="TIMBER" target="NAILS">
+      <data key="d0">4.361667696408017</data>
+    </edge>
+    <edge source="TIMBER" target="PIPES">
+      <data key="d0">2.7293365450847924</data>
+    </edge>
+    <edge source="TIMBER" target="STEEL">
+      <data key="d0">7.694538619849419</data>
+    </edge>
+    <edge source="TIMBER" target="exchange_rate">
+      <data key="d0">2.6663543750393313</data>
+    </edge>
+    <edge source="TIMBER" target="activity_indicator">
+      <data key="d0">2.731740665983842</data>
+    </edge>
+    <edge source="exchange_rate" target="DIESEL">
+      <data key="d0">4.03128288081223</data>
+    </edge>
+    <edge source="exchange_rate" target="IRONSTEEL">
+      <data key="d0">3.9715002647676405</data>
+    </edge>
+    <edge source="exchange_rate" target="MURRAM">
+      <data key="d0">2.52762681112489</data>
+    </edge>
+    <edge source="exchange_rate" target="TIMBER">
+      <data key="d0">2.490122787709894</data>
+    </edge>
+    <edge source="exchange_rate" target="ppi_manufacturing">
+      <data key="d0">4.168630927370075</data>
+    </edge>
+    <edge source="exchange_rate" target="brent_crude_usd">
+      <data key="d0">6.182029415074134</data>
+    </edge>
+    <edge source="exchange_rate" target="central_bank_rate">
+      <data key="d0">3.8362663477271757</data>
+    </edge>
+    <edge source="exchange_rate" target="lending_rate">
+      <data key="d0">3.2505073999969247</data>
+    </edge>
+    <edge source="exchange_rate" target="private_credit">
+      <data key="d0">7.047173088025375</data>
+    </edge>
+    <edge source="ppi_manufacturing" target="BRICK">
+      <data key="d0">2.964974536118093</data>
+    </edge>
+    <edge source="ppi_manufacturing" target="CEM">
+      <data key="d0">5.346712931897431</data>
+    </edge>
+    <edge source="ppi_manufacturing" target="DIESEL">
+      <data key="d0">9.228296989394476</data>
+    </edge>
+    <edge source="ppi_manufacturing" target="IRON">
+      <data key="d0">3.8618338001709747</data>
+    </edge>
+    <edge source="ppi_manufacturing" target="LIME">
+      <data key="d0">2.6942144592114063</data>
+    </edge>
+    <edge source="ppi_manufacturing" target="MURRAM">
+      <data key="d0">8.309750446909053</data>
+    </edge>
+    <edge source="ppi_manufacturing" target="SAND">
+      <data key="d0">7.653512502132466</data>
+    </edge>
+    <edge source="ppi_manufacturing" target="STEEL">
+      <data key="d0">2.913792331350796</data>
+    </edge>
+    <edge source="ppi_manufacturing" target="TILES">
+      <data key="d0">13.589434978747509</data>
+    </edge>
+    <edge source="ppi_manufacturing" target="exchange_rate">
+      <data key="d0">5.699886471292589</data>
+    </edge>
+    <edge source="ppi_manufacturing" target="brent_crude_usd">
+      <data key="d0">6.0328517584823205</data>
+    </edge>
+    <edge source="brent_crude_usd" target="CEM">
+      <data key="d0">3.7118827619494135</data>
+    </edge>
+    <edge source="brent_crude_usd" target="DIESEL">
+      <data key="d0">7.93785534284091</data>
+    </edge>
+    <edge source="brent_crude_usd" target="MURRAM">
+      <data key="d0">6.344071313048783</data>
+    </edge>
+    <edge source="brent_crude_usd" target="SAND">
+      <data key="d0">2.600480199243046</data>
+    </edge>
+    <edge source="brent_crude_usd" target="exchange_rate">
+      <data key="d0">5.362132417159598</data>
+    </edge>
+    <edge source="brent_crude_usd" target="ppi_manufacturing">
+      <data key="d0">4.5329425128057546</data>
+    </edge>
+    <edge source="iron_ore_usd" target="ALU">
+      <data key="d0">2.6664509079627106</data>
+    </edge>
+    <edge source="iron_ore_usd" target="CEM">
+      <data key="d0">7.226779841304398</data>
+    </edge>
+    <edge source="iron_ore_usd" target="LABOUR">
+      <data key="d0">4.185357607712144</data>
+    </edge>
+    <edge source="iron_ore_usd" target="TILES">
+      <data key="d0">3.6428777115382194</data>
+    </edge>
+    <edge source="gscpi_supply_chain_pressure" target="ALU">
+      <data key="d0">3.632460319089206</data>
+    </edge>
+    <edge source="gscpi_supply_chain_pressure" target="NAILS">
+      <data key="d0">4.6254373142223475</data>
+    </edge>
+    <edge source="central_bank_rate" target="AGG">
+      <data key="d0">2.510793822961975</data>
+    </edge>
+    <edge source="central_bank_rate" target="BRICK">
+      <data key="d0">6.666182528840099</data>
+    </edge>
+    <edge source="central_bank_rate" target="LABOUR">
+      <data key="d0">2.744100960284123</data>
+    </edge>
+    <edge source="central_bank_rate" target="exchange_rate">
+      <data key="d0">2.2323641576764515</data>
+    </edge>
+    <edge source="lending_rate" target="BRICK">
+      <data key="d0">2.2403962577789702</data>
+    </edge>
+    <edge source="lending_rate" target="exchange_rate">
+      <data key="d0">2.591745059247366</data>
+    </edge>
+    <edge source="lending_rate" target="private_credit">
+      <data key="d0">8.832846332296914</data>
+    </edge>
+    <edge source="private_credit" target="LIME">
+      <data key="d0">3.751377536362473</data>
+    </edge>
+    <edge source="private_credit" target="exchange_rate">
+      <data key="d0">6.582261127328862</data>
+    </edge>
+    <edge source="private_credit" target="lending_rate">
+      <data key="d0">10.221767854705627</data>
+    </edge>
+    <edge source="private_credit" target="activity_indicator">
+      <data key="d0">3.3918929395535606</data>
+    </edge>
+    <edge source="activity_indicator" target="ALU">
+      <data key="d0">2.144896995592055</data>
+    </edge>
+    <edge source="activity_indicator" target="PIPES">
+      <data key="d0">4.5800453510252614</data>
+    </edge>
+    <edge source="activity_indicator" target="private_credit">
+      <data key="d0">2.8909664227036065</data>
+    </edge>
+  </graph>
+</graphml>

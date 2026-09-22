@@ -5,7 +5,7 @@ from types import SimpleNamespace
 import numpy as np
 import pandas as pd
 
-from src.volatility.spillover import SpilloverConfig, fit_spillover_table, generalized_fevd, transmission_scores
+from src.volatility.spillover import SpilloverConfig, fit_spillover_table, generalized_fevd, log_returns, transmission_scores
 
 
 def test_generalized_fevd_benchmark_values() -> None:
@@ -46,3 +46,21 @@ def test_spillover_rows_sum_to_100() -> None:
 
     tx = transmission_scores(spill)
     assert {"to_others", "from_others", "net"}.issubset(tx.columns)
+
+
+def test_log_returns_keeps_signed_columns_via_first_difference() -> None:
+    """
+    A signed, mean-zero-ish column (e.g. GSCPI) must not be silently masked
+    to all-NaN by log(); it should be differenced directly and survive.
+    """
+    df = pd.DataFrame(
+        {
+            "PRICE": [100.0, 102.0, 101.0, 105.0],
+            "ZSCORE": [-1.2, 0.3, -0.5, 1.1],
+        }
+    )
+    out = log_returns(df, ["PRICE", "ZSCORE"])
+
+    assert out["ZSCORE"].notna().sum() == 3
+    np.testing.assert_allclose(out["ZSCORE"].to_numpy(), np.diff(df["ZSCORE"].to_numpy()))
+    np.testing.assert_allclose(out["PRICE"].dropna().to_numpy(), np.diff(np.log(df["PRICE"].to_numpy())))

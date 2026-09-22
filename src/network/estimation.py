@@ -23,17 +23,32 @@ def correlation_matrix(data: pd.DataFrame, correlation_type: CorrelationType = "
     x = data.dropna().copy()
     if x.empty:
         raise ValueError("No valid observations available for correlation matrix.")
+    if x.shape[0] < x.shape[1]:
+        raise ValueError(
+            f"Correlation matrix needs at least as many rows as columns "
+            f"(got {x.shape[0]} rows, {x.shape[1]} columns); reduce the node set or widen the window."
+        )
 
     if correlation_type == "pearson":
         return x.corr(method="pearson")
     if correlation_type == "spearman":
         return x.corr(method="spearman")
     if correlation_type == "partial":
-        lw = LedoitWolf().fit(x.values)
-        precision = lw.precision_
-        d = np.sqrt(np.diag(precision))
-        partial = -precision / np.outer(d, d)
+        # LedoitWolf shrinkage is applied precisely because the raw sample
+        # covariance is ill-conditioned in this regime (k close to n). scipy's
+        # pinvh internally computes 1/eigenvalue for *all* eigenvalues before
+        # masking out the ones below its cutoff, which raises a spurious
+        # divide-by-zero/invalid RuntimeWarning even though the masked final
+        # result is valid -- suppress that known false alarm here, but still
+        # assert finiteness of the actual output rather than trust it blindly.
+        with np.errstate(divide="ignore", invalid="ignore", over="ignore"):
+            lw = LedoitWolf().fit(x.values)
+            precision = lw.precision_
+            d = np.sqrt(np.diag(precision))
+            partial = -precision / np.outer(d, d)
         np.fill_diagonal(partial, 1.0)
+        if not np.all(np.isfinite(partial)):
+            raise FloatingPointError("Partial correlation matrix contains non-finite values.")
         return pd.DataFrame(partial, index=x.columns, columns=x.columns)
 
     raise ValueError(f"Unsupported correlation_type={correlation_type}")

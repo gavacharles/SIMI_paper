@@ -15,7 +15,14 @@ if str(ROOT) not in sys.path:
 from src.network.centrality import centrality_table
 from src.network.estimation import build_correlation_network, correlation_matrix
 from src.simi.scoring import compute_simi, estimate_cipi_basket_shares, weighting_scenarios
-from src.volatility.spillover import SpilloverConfig, fit_spillover_table, identify_material_columns, log_returns, transmission_scores
+from src.volatility.spillover import (
+    SpilloverConfig,
+    fit_spillover_table,
+    identify_material_columns,
+    log_returns,
+    prepare_returns,
+    transmission_scores,
+)
 
 
 SUBSAMPLES = {
@@ -34,6 +41,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--output-dir", default=str((ROOT / "papers" / "P4").resolve()))
     p.add_argument("--corr-type", choices=["pearson", "spearman", "partial"], default="partial")
     p.add_argument("--energy-proxy", default="ppi_manufacturing")
+    p.add_argument("--extra-nodes", default="", help="Comma-separated extra columns to include as auxiliary nodes.")
     return p.parse_args()
 
 
@@ -45,20 +53,25 @@ def run_scenario(
     corr_type: str,
     scenario: str,
     energy_proxy: str,
+    extra_nodes: list[str] | None = None,
 ) -> pd.DataFrame:
     aux = ["exchange_rate"]
     if energy_proxy in panel.columns:
         aux.append(energy_proxy)
+    if extra_nodes:
+        aux.extend(extra_nodes)
 
     cols = [c for c in materials + aux if c in panel.columns]
     ret = log_returns(panel, cols)
     if len(ret) > window:
         ret = ret.tail(window)
 
-    spill = fit_spillover_table(ret, SpilloverConfig(lags=2, horizon=10, min_obs=max(24, window // 2)))
+    min_obs = max(24, window // 2)
+    clean_ret = prepare_returns(ret, min_obs)
+    spill = fit_spillover_table(clean_ret, SpilloverConfig(lags=2, horizon=10, min_obs=min_obs))
     tx = transmission_scores(spill)
 
-    corr = correlation_matrix(ret, correlation_type=corr_type)
+    corr = correlation_matrix(clean_ret, correlation_type=corr_type)
     net = build_correlation_network(corr, threshold=threshold)
     cent = centrality_table(net)
 
@@ -93,6 +106,7 @@ def main() -> None:
 
     panel = pd.read_csv(args.panel_path, parse_dates=["date"]).sort_values("date")
     materials = identify_material_columns(panel.columns)
+    extra_nodes = [n.strip() for n in args.extra_nodes.split(",") if n.strip()]
 
     thresholds = [0.15, 0.20, 0.25, 0.30]
     windows = [36, 48, 60]
@@ -106,7 +120,7 @@ def main() -> None:
 
         for window, thr, wname in itertools.product(windows, thresholds, weightings):
             try:
-                simi = run_scenario(sub, materials, window, thr, args.corr_type, wname, args.energy_proxy)
+                simi = run_scenario(sub, materials, window, thr, args.corr_type, wname, args.energy_proxy, extra_nodes)
                 scenario_id = f"{sample_name}|w{window}|t{thr:.2f}|{wname}"
                 tmp = simi[["rank"]].copy().reset_index(names="node")
                 tmp["scenario_id"] = scenario_id

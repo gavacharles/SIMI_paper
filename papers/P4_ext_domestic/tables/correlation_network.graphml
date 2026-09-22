@@ -1,0 +1,112 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d2" for="edge" attr.name="distance" attr.type="double" />
+  <key id="d1" for="edge" attr.name="abs_weight" attr.type="double" />
+  <key id="d0" for="edge" attr.name="weight" attr.type="double" />
+  <graph edgedefault="undirected">
+    <node id="AGG" />
+    <node id="ALU" />
+    <node id="BRICK" />
+    <node id="CEM" />
+    <node id="CLAY" />
+    <node id="DIESEL" />
+    <node id="IRON" />
+    <node id="IRONSTEEL" />
+    <node id="LABOUR" />
+    <node id="LIME" />
+    <node id="MURRAM" />
+    <node id="NAILS" />
+    <node id="PAINT" />
+    <node id="PIPES" />
+    <node id="SAND" />
+    <node id="STEEL" />
+    <node id="TILES" />
+    <node id="TIMBER" />
+    <node id="exchange_rate" />
+    <node id="ppi_manufacturing" />
+    <node id="central_bank_rate" />
+    <node id="lending_rate" />
+    <node id="private_credit" />
+    <node id="activity_indicator" />
+    <edge source="AGG" target="DIESEL">
+      <data key="d0">0.21461109587306282</data>
+      <data key="d1">0.21461109587306282</data>
+      <data key="d2">0.7853889041269372</data>
+    </edge>
+    <edge source="AGG" target="SAND">
+      <data key="d0">-0.22529711370305355</data>
+      <data key="d1">0.22529711370305355</data>
+      <data key="d2">0.7747028862969465</data>
+    </edge>
+    <edge source="BRICK" target="central_bank_rate">
+      <data key="d0">0.27666499915802467</data>
+      <data key="d1">0.27666499915802467</data>
+      <data key="d2">0.7233350008419753</data>
+    </edge>
+    <edge source="CEM" target="NAILS">
+      <data key="d0">-0.40888326795054486</data>
+      <data key="d1">0.40888326795054486</data>
+      <data key="d2">0.5911167320494551</data>
+    </edge>
+    <edge source="CEM" target="PAINT">
+      <data key="d0">0.273165077012345</data>
+      <data key="d1">0.273165077012345</data>
+      <data key="d2">0.726834922987655</data>
+    </edge>
+    <edge source="CLAY" target="DIESEL">
+      <data key="d0">-0.22336436072138077</data>
+      <data key="d1">0.22336436072138077</data>
+      <data key="d2">0.7766356392786192</data>
+    </edge>
+    <edge source="DIESEL" target="MURRAM">
+      <data key="d0">0.3393212355513147</data>
+      <data key="d1">0.3393212355513147</data>
+      <data key="d2">0.6606787644486853</data>
+    </edge>
+    <edge source="DIESEL" target="TILES">
+      <data key="d0">0.23998291632673388</data>
+      <data key="d1">0.23998291632673388</data>
+      <data key="d2">0.7600170836732661</data>
+    </edge>
+    <edge source="DIESEL" target="activity_indicator">
+      <data key="d0">-0.20464582093289438</data>
+      <data key="d1">0.20464582093289438</data>
+      <data key="d2">0.7953541790671056</data>
+    </edge>
+    <edge source="IRON" target="PAINT">
+      <data key="d0">-0.25899006292088084</data>
+      <data key="d1">0.25899006292088084</data>
+      <data key="d2">0.7410099370791192</data>
+    </edge>
+    <edge source="NAILS" target="STEEL">
+      <data key="d0">0.23343552669177792</data>
+      <data key="d1">0.23343552669177792</data>
+      <data key="d2">0.7665644733082221</data>
+    </edge>
+    <edge source="NAILS" target="central_bank_rate">
+      <data key="d0">-0.22524987973219807</data>
+      <data key="d1">0.22524987973219807</data>
+      <data key="d2">0.774750120267802</data>
+    </edge>
+    <edge source="SAND" target="private_credit">
+      <data key="d0">-0.2200338153107216</data>
+      <data key="d1">0.2200338153107216</data>
+      <data key="d2">0.7799661846892784</data>
+    </edge>
+    <edge source="exchange_rate" target="central_bank_rate">
+      <data key="d0">0.2335513319863144</data>
+      <data key="d1">0.2335513319863144</data>
+      <data key="d2">0.7664486680136856</data>
+    </edge>
+    <edge source="exchange_rate" target="private_credit">
+      <data key="d0">0.2096610508145231</data>
+      <data key="d1">0.2096610508145231</data>
+      <data key="d2">0.7903389491854769</data>
+    </edge>
+    <edge source="lending_rate" target="private_credit">
+      <data key="d0">-0.3472255264452216</data>
+      <data key="d1">0.3472255264452216</data>
+      <data key="d2">0.6527744735547785</data>
+    </edge>
+  </graph>
+</graphml>

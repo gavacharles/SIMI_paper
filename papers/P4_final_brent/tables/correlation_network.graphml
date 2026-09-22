@@ -1,0 +1,84 @@
+<?xml version='1.0' encoding='utf-8'?>
+<graphml xmlns="http://graphml.graphdrawing.org/xmlns" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:schemaLocation="http://graphml.graphdrawing.org/xmlns http://graphml.graphdrawing.org/xmlns/1.0/graphml.xsd">
+  <key id="d2" for="edge" attr.name="distance" attr.type="double" />
+  <key id="d1" for="edge" attr.name="abs_weight" attr.type="double" />
+  <key id="d0" for="edge" attr.name="weight" attr.type="double" />
+  <graph edgedefault="undirected">
+    <node id="AGG" />
+    <node id="ALU" />
+    <node id="BRICK" />
+    <node id="CEM" />
+    <node id="CLAY" />
+    <node id="DIESEL" />
+    <node id="IRON" />
+    <node id="IRONSTEEL" />
+    <node id="LABOUR" />
+    <node id="LIME" />
+    <node id="MURRAM" />
+    <node id="NAILS" />
+    <node id="PAINT" />
+    <node id="PIPES" />
+    <node id="SAND" />
+    <node id="STEEL" />
+    <node id="TILES" />
+    <node id="TIMBER" />
+    <node id="exchange_rate" />
+    <node id="ppi_manufacturing" />
+    <node id="brent_crude_usd" />
+    <edge source="AGG" target="DIESEL">
+      <data key="d0">0.2342008705827508</data>
+      <data key="d1">0.2342008705827508</data>
+      <data key="d2">0.7657991294172493</data>
+    </edge>
+    <edge source="AGG" target="SAND">
+      <data key="d0">-0.25138637948632647</data>
+      <data key="d1">0.25138637948632647</data>
+      <data key="d2">0.7486136205136735</data>
+    </edge>
+    <edge source="CEM" target="IRON">
+      <data key="d0">0.21231219446667832</data>
+      <data key="d1">0.21231219446667832</data>
+      <data key="d2">0.7876878055333216</data>
+    </edge>
+    <edge source="CEM" target="NAILS">
+      <data key="d0">-0.44104761266120623</data>
+      <data key="d1">0.44104761266120623</data>
+      <data key="d2">0.5589523873387938</data>
+    </edge>
+    <edge source="CEM" target="PAINT">
+      <data key="d0">0.29684520794548586</data>
+      <data key="d1">0.29684520794548586</data>
+      <data key="d2">0.7031547920545141</data>
+    </edge>
+    <edge source="CEM" target="TILES">
+      <data key="d0">-0.20354404763521286</data>
+      <data key="d1">0.20354404763521286</data>
+      <data key="d2">0.7964559523647872</data>
+    </edge>
+    <edge source="CLAY" target="DIESEL">
+      <data key="d0">-0.22389849697177386</data>
+      <data key="d1">0.22389849697177386</data>
+      <data key="d2">0.7761015030282261</data>
+    </edge>
+    <edge source="DIESEL" target="MURRAM">
+      <data key="d0">0.34757203586289226</data>
+      <data key="d1">0.34757203586289226</data>
+      <data key="d2">0.6524279641371078</data>
+    </edge>
+    <edge source="DIESEL" target="TILES">
+      <data key="d0">0.24339921310608284</data>
+      <data key="d1">0.24339921310608284</data>
+      <data key="d2">0.7566007868939172</data>
+    </edge>
+    <edge source="IRON" target="PAINT">
+      <data key="d0">-0.28319409493231246</data>
+      <data key="d1">0.28319409493231246</data>
+      <data key="d2">0.7168059050676876</data>
+    </edge>
+    <edge source="exchange_rate" target="brent_crude_usd">
+      <data key="d0">0.22560301878856764</data>
+      <data key="d1">0.22560301878856764</data>
+      <data key="d2">0.7743969812114324</data>
+    </edge>
+  </graph>
+</graphml>

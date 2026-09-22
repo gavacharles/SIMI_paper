@@ -25,6 +25,7 @@ from src.volatility.spillover import (
     fit_spillover_table,
     identify_material_columns,
     log_returns,
+    prepare_returns,
     transmission_scores,
 )
 
@@ -43,6 +44,7 @@ def parse_args() -> argparse.Namespace:
     p.add_argument("--corr-threshold", type=float, default=0.2)
     p.add_argument("--spill-threshold", type=float, default=2.0)
     p.add_argument("--energy-proxy", default="ppi_manufacturing")
+    p.add_argument("--extra-nodes", default="", help="Comma-separated extra columns to include as auxiliary nodes.")
     return p.parse_args()
 
 
@@ -58,6 +60,8 @@ def main() -> None:
     aux_nodes = ["exchange_rate"]
     if args.energy_proxy in panel.columns:
         aux_nodes.append(args.energy_proxy)
+    if args.extra_nodes:
+        aux_nodes.extend(n.strip() for n in args.extra_nodes.split(",") if n.strip())
 
     node_cols = [c for c in materials + aux_nodes if c in panel.columns]
     returns = log_returns(panel, node_cols)
@@ -65,14 +69,16 @@ def main() -> None:
     if args.window > 0 and len(returns) > args.window:
         returns = returns.tail(args.window)
 
-    spill_cfg = SpilloverConfig(lags=args.lags, horizon=args.horizon, min_obs=max(36, args.window // 2))
-    spill = fit_spillover_table(returns, spill_cfg)
+    min_obs = max(36, args.window // 2)
+    spill_cfg = SpilloverConfig(lags=args.lags, horizon=args.horizon, min_obs=min_obs)
+    clean_returns = prepare_returns(returns, min_obs)
+    spill = fit_spillover_table(clean_returns, spill_cfg)
     spill.to_csv(out_dir / "tables" / "spillover_table.csv")
 
     tx = transmission_scores(spill)
     tx.to_csv(out_dir / "tables" / "spillover_transmission.csv")
 
-    corr = correlation_matrix(returns, correlation_type=args.corr_type)
+    corr = correlation_matrix(clean_returns, correlation_type=args.corr_type)
     corr.to_csv(out_dir / "tables" / "correlation_matrix.csv")
 
     corr_net = build_correlation_network(corr, threshold=args.corr_threshold)

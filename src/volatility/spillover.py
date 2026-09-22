@@ -1,10 +1,13 @@
 from __future__ import annotations
 
 from dataclasses import dataclass
-from typing import Sequence
+from types import SimpleNamespace
+from typing import Literal, Sequence
 
 import numpy as np
 import pandas as pd
+from sklearn.linear_model import LassoCV
+from sklearn.model_selection import TimeSeriesSplit
 from statsmodels.tsa.api import VAR
 
 
@@ -23,6 +26,14 @@ class SpilloverConfig:
     lags: int = 2
     horizon: int = 10
     min_obs: int = 48
+    # "ols": classical unrestricted VAR (statsmodels), appropriate only when
+    #   T >> k^2 * lags. "lasso": elastic-net-regularized VAR per equation
+    #   (Demirer, Diebold, Liu & Yilmaz 2018 style), appropriate for the
+    #   high-dimensional/short-T regime this panel is actually in.
+    #   "auto" switches to lasso once k * lags exceeds ~40% of T, which is
+    #   where the unrestricted OLS system starts becoming rank-deficient.
+    method: Literal["auto", "ols", "lasso"] = "auto"
+    lasso_cv_splits: int = 5
 
 
 def identify_material_columns(columns: Sequence[str]) -> list[str]:
@@ -38,9 +49,31 @@ def identify_material_columns(columns: Sequence[str]) -> list[str]:
 
 
 def log_returns(df: pd.DataFrame, columns: Sequence[str]) -> pd.DataFrame:
-    px = df.loc[:, list(columns)].apply(pd.to_numeric, errors="coerce")
-    px = px.where(px > 0)
-    out = np.log(px).diff()
+    """
+    Log-difference for strictly positive price-level columns (material
+    sub-indices, exchange rate, commodity benchmarks). Columns containing
+    non-positive values are assumed to already be a signed, roughly-
+    stationary index (e.g. GSCPI, a standardized z-score that oscillates
+    around 0) rather than a price level -- log() of a non-positive value is
+    undefined, and masking negatives to NaN (the previous behavior) silently
+    drops such a column from the whole system once its NaN share exceeds
+    the coverage filter, without any warning that it happened. Those columns
+    get a plain first difference instead, which is the correct transform for
+    an already-stationary index and keeps the column in the estimation.
+    """
+    x = df.loc[:, list(columns)].apply(pd.to_numeric, errors="coerce")
+    has_nonpositive = (x <= 0).any(axis=0)
+
+    price_cols = x.columns[~has_nonpositive]
+    signed_cols = x.columns[has_nonpositive]
+
+    parts = []
+    if len(price_cols) > 0:
+        parts.append(np.log(x[price_cols]).diff())
+    if len(signed_cols) > 0:
+        parts.append(x[signed_cols].diff())
+
+    out = pd.concat(parts, axis=1)[list(columns)] if parts else x.iloc[0:0]
     return out.dropna(how="all")
 
 
@@ -99,9 +132,90 @@ def generalized_fevd(var_res, horizon: int = 10) -> pd.DataFrame:
     return pd.DataFrame(theta * 100.0, index=names, columns=names)
 
 
-def fit_spillover_table(returns: pd.DataFrame, cfg: SpilloverConfig) -> pd.DataFrame:
+def _lag_design(data: np.ndarray, lags: int) -> tuple[np.ndarray, np.ndarray]:
+    """Build (Y, X) for Y_t = [X_t] beta, X_t = concat(y_{t-1}, ..., y_{t-lags})."""
+    n, k = data.shape
+    y = data[lags:]
+    x = np.concatenate([data[lags - lag : n - lag] for lag in range(1, lags + 1)], axis=1)
+    return y, x
+
+
+def fit_lasso_var(clean: pd.DataFrame, lags: int, cv_splits: int = 5) -> SimpleNamespace:
+    """
+    Elastic-net-style regularized VAR, fit one equation (target variable) at a
+    time via cross-validated Lasso on the stacked lag design. This is the
+    standard fix for k^2*lags >> T instability in high-dimensional spillover
+    networks (Demirer, Diebold, Liu & Yilmaz, 2018, J. Econometrics).
+
+    Returns an object exposing the same attributes fit_spillover_table's
+    downstream code (generalized_fevd) needs from a statsmodels VARResults:
+    .coefs (lags, k, k), .sigma_u (k, k), .names, .neqs, .k_ar.
+    """
+    names = list(clean.columns)
+    k = len(names)
+    y_full, x_full = _lag_design(clean.to_numpy(dtype=float), lags)
+    n_obs = y_full.shape[0]
+
+    n_splits = max(2, min(cv_splits, n_obs - 1))
+    tscv = TimeSeriesSplit(n_splits=n_splits)
+
+    # Lagged regressors span very different native scales/volatilities (e.g.
+    # cement returns vs. exchange-rate returns), which makes unscaled
+    # coordinate descent numerically unstable (observed as inf/nan in the
+    # predict step). Scale each predictor column by its std before fitting
+    # and undo the scaling on the recovered coefficients.
+    x_std = x_full.std(axis=0)
+    x_std_safe = np.where(x_std < 1e-10, 1.0, x_std)
+    x_scaled = x_full / x_std_safe
+
+    coefs_by_eq = np.zeros((k, k * lags))
+    resid = np.zeros((n_obs, k))
+    for j in range(k):
+        target = y_full[:, j]
+        try:
+            with np.errstate(divide="ignore", invalid="ignore", over="ignore"):
+                model = LassoCV(cv=tscv, max_iter=100000, tol=1e-5, n_alphas=50, random_state=0)
+                model.fit(x_scaled, target)
+                beta = model.coef_ / x_std_safe
+                if not np.all(np.isfinite(beta)):
+                    raise ValueError("non-finite Lasso coefficients")
+                fitted = x_full @ beta + model.intercept_
+            if not np.all(np.isfinite(fitted)):
+                raise ValueError("non-finite fitted values")
+        except Exception:
+            beta = np.zeros(k * lags)
+            fitted = np.zeros(n_obs)
+        coefs_by_eq[j, :] = beta
+        resid[:, j] = target - fitted
+
+    # coefs_by_eq columns are ordered [lag1_var1..lag1_vark, lag2_var1.., ...];
+    # reshape into statsmodels' coefs[lag-1][eq, var] convention.
+    coefs = np.zeros((lags, k, k))
+    for lag in range(lags):
+        coefs[lag] = coefs_by_eq[:, lag * k : (lag + 1) * k]
+
+    sigma_u = np.cov(resid, rowvar=False)
+    if sigma_u.ndim == 0:
+        sigma_u = np.array([[float(sigma_u)]])
+
+    return SimpleNamespace(neqs=k, k_ar=lags, coefs=coefs, sigma_u=sigma_u, names=names)
+
+
+def prepare_returns(returns: pd.DataFrame, min_obs: int) -> pd.DataFrame:
+    """
+    Shared cleaning step (coverage filter, short-gap fill, winsorize) so that
+    spillover (VAR/FEVD) and correlation/centrality estimation operate over
+    the *same* node set and the *same* rows. Previously the correlation step
+    ran plain `.dropna()` over the raw returns independently, which for a
+    ~20-column panel with staggered coverage could leave fewer valid rows
+    than columns -- a guaranteed-singular sample covariance matrix.
+    """
+    return _prepare_returns(returns, min_obs)
+
+
+def _prepare_returns(returns: pd.DataFrame, min_obs: int) -> pd.DataFrame:
     clean = returns.copy()
-    keep = [c for c in clean.columns if clean[c].notna().sum() >= cfg.min_obs]
+    keep = [c for c in clean.columns if clean[c].notna().sum() >= min_obs]
     clean = clean[keep]
     clean = clean.ffill(limit=2).bfill(limit=2).dropna()
     clean = clean.replace([np.inf, -np.inf], np.nan).dropna()
@@ -115,8 +229,25 @@ def fit_spillover_table(returns: pd.DataFrame, cfg: SpilloverConfig) -> pd.DataF
         lo, hi = clean[col].quantile([0.01, 0.99])
         clean[col] = clean[col].clip(lower=lo, upper=hi)
 
+    return clean
+
+
+def fit_spillover_table(returns: pd.DataFrame, cfg: SpilloverConfig) -> pd.DataFrame:
+    clean = _prepare_returns(returns, cfg.min_obs)
     if clean.shape[1] < 2:
         raise ValueError("Need at least two valid series for spillover estimation.")
+
+    n_obs, k = clean.shape
+    method = cfg.method
+    if method == "auto":
+        # Unrestricted VAR(p) has k^2*p free parameters; once that exceeds
+        # ~40% of the available observations, OLS is at serious risk of
+        # rank-deficiency / near-singular residual covariance.
+        method = "lasso" if (k * k * cfg.lags) > 0.4 * n_obs else "ols"
+
+    if method == "lasso":
+        res = fit_lasso_var(clean, cfg.lags, cfg.lasso_cv_splits)
+        return generalized_fevd(res, horizon=cfg.horizon)
 
     model = VAR(clean)
     res = None
