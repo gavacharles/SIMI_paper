@@ -19,7 +19,7 @@ This folder is standalone for Paper 4 drafting and estimation, while consuming `
 4. `scripts/run_robustness.py`
    - threshold × window × weighting × subsample rank-stability sweep
    - writes a single stability heatmap
-5. `papers/P4/manuscript.md`
+5. Manuscript draft (kept private until publication)
    - full draft skeleton with methods, hypotheses, robustness, and practitioner interpretation.
 
 ## Usage
